@@ -1,11 +1,13 @@
 <template>
+
     <div class="song_card">
         <p>{{ id }}</p>
-        <h3>{{ title }}</h3>
+        <h3 ref="song-title">{{ title }}</h3>
         <h5>{{ artist }}</h5>
         <div class="select_song">
-        <button>>></button></div>
+        <button @click="push_song">>></button></div>
     </div>
+    
 
 </template>
 
@@ -14,6 +16,12 @@
         name: "song-list",
         mounted() {
         document.body.style.background = "black";
+  },
+  methods: {
+      push_song() {
+          var song_title = this.$refs['song-title'].value;
+          this.$emit('song_pushed', song_title);
+      }
   },
   props: {
       id: String,
@@ -42,6 +50,4 @@ button {
     width: 40px;
     height: 20px;
 }
-
-
 </style>

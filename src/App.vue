@@ -3,17 +3,29 @@
     <page-body></page-body>
 
     <div class="song_grid">
+      <h2>Song Collection</h2>
     <song-list v-for="song in songs"
     :key="song['id']"
     :title="song['title']"
     :artist="song['artist']"
     >
     </song-list>
-  
-    </div>
-
-    <play-list></play-list>
   </div>
+
+    
+    <div class="play_grid">
+      <h2>My Playlist</h2>
+    <play-list v-for="song in songs"
+    :key="song['id']"
+    :title="song['title']"
+    :artist="song['artist']"
+    @song_pushed="react_to_song_pushed"
+    >
+    </play-list>
+    <h1>{{ song_pushed }}</h1>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -23,6 +35,12 @@ import PlayList from './components/PlayList.vue'
 
 export default {
   name: 'App',
+  methods: {
+    react_to_song_pushed(song_title) {
+      
+      this.song_pushed = song_title;
+    }
+  },
   components: {
     PageBody,
     SongList,
@@ -31,6 +49,7 @@ export default {
 
 data() {
   return {
+    song_pushed: undefined,
     songs: [
       {
       id: 1,
@@ -85,7 +104,15 @@ data() {
 }
 .song_grid {
   display: grid;
-  margin-left: 15%;
-  
+  position: absolute;
+  left: 20%;
+}
+.play_grid {
+  display: grid;
+  position: absolute;
+  right: 20%;
+}
+h1, h2 {
+  color: white;
 }
 </style>
