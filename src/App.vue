@@ -35,9 +35,13 @@ import PlayList from './components/PlayList.vue'
 
 export default {
   name: 'App',
+  
+  mounted () {
+    this.$root.$on('react_to_song_pushed', this.react_to_song_pushed);
+    document.body.style.background = "black";
+  },
   methods: {
     react_to_song_pushed(song_title) {
-      
       this.song_pushed = song_title;
     }
   },
